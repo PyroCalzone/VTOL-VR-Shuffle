@@ -78,13 +78,9 @@ if __name__ == "__main__": #This handles the log file, new lines and setting the
         global pilot
         if "Set current pilot to " in line:
             pilot = line.split("Set current pilot to ")[1]
-        elif f"{pilot} was killed" in line:
-            renameFilesRandomly()
-        elif f"{pilot} ejected." in line:
+        elif f"{pilot} unspawned vehicle" in line:
             renameFilesRandomly()
         elif "Stopping EndMission" in line:
-            renameFilesRandomly()
-        elif "LeaveLobby()" in line:
             renameFilesRandomly()
 
     logFilePath = get_log_path()
@@ -92,6 +88,6 @@ if __name__ == "__main__": #This handles the log file, new lines and setting the
 
     while True:
         line = tail_process.stdout.readline()
-        line = line.decode("utf-8").strip()
+        line = line.decode("utf-8", errors='ignore').strip()
         if line:
             on_new_line(line)
