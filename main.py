@@ -75,7 +75,6 @@ if __name__ == "__main__": #This handles the log file, new lines and setting the
     pilot = None
 
     def on_new_line(line):
-        print(line)
         global pilot
         if "Set current pilot to " in line:
             pilot = line.split("Set current pilot to ")[1]
