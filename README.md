@@ -6,7 +6,6 @@ This script shuffles songs in VTOL VR when the pilot dies or leaves the lobby
 ```
 pip install vdf
 ```
-<br />
 **Requests** optionally required for checking for updates
 ```
 pip install requests
