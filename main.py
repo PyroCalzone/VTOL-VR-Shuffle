@@ -34,7 +34,9 @@ import subprocess
 import uuid
 import vdf
 import winreg
-import time 
+import time
+
+
 
 def get_log_path(): # Returns the path to the log file
     return os.path.join(os.getenv('APPDATA'), os.pardir, "LocalLow", "Boundless Dynamics, LLC", "VTOLVR", "player.log") 
@@ -74,6 +76,22 @@ if __name__ == "__main__": #This handles the log file, new lines and setting the
     numberOfLines = 0 #Number of lines at startup
     currentLine = 0 #Number of lines processed
     logFilePath = get_log_path()
+    currentVersion = "v1.0.3"
+    print(f"VTOL VR Radio Shuffler {currentVersion}")
+
+    #Detect new version on github
+    try:
+        import requests
+    except (ImportError):
+        print("Requests not installed, skipping update check")
+    else:
+        api_page = "https://api.github.com/repos/PyroCalzone/VTOL-VR-Shuffle/releases/latest"
+        request = requests.get(api_page).json()
+        newestVersion = request["tag_name"]
+        if newestVersion > currentVersion:
+            print(f"Update detected ({newestVersion}) check out the update on github: https://github.com/PyroCalzone/VTOL-VR-Shuffle/releases/latest")
+            print(f'Changelog : \n{request["body"]}\n-------\n')
+    
 
     #add a flag to see if we've reached the end of the log file on startup
 
@@ -82,7 +100,6 @@ if __name__ == "__main__": #This handles the log file, new lines and setting the
     
 
     def on_new_line(line):
-        #print(line)
         global pilot
         global counter
         global deaths
