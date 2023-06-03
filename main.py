@@ -34,7 +34,6 @@ import subprocess
 import uuid
 import vdf
 import winreg
-import re
 import time 
 
 def get_log_path(): # Returns the path to the log file
@@ -83,7 +82,6 @@ if __name__ == "__main__": #This handles the log file, new lines and setting the
     
 
     def on_new_line(line):
-        search = re.search(r'^MP Spawn \[\d+\] \((.+?) \((.+?)\)\).SetTeam\(Allied\)', line)
         #print(line)
         global pilot
         global counter
